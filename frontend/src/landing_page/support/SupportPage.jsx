@@ -1,8 +1,13 @@
 import React from 'react';
+import Hero from './Hero';
+import SupportTopics from './SupportTopics';
 
 function SupportPage() {
     return ( 
-        <h1>SupportPage</h1>
+        <>
+            <Hero />
+            <SupportTopics />
+        </>
      );
 }
 

@@ -1,0 +1,25 @@
+<svg width="480" height="120" viewBox="0 0 480 120" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Icon -->
+  <g transform="translate(10,20)">
+    
+    <!-- Axis -->
+    <path d="M10 80 L10 20 M10 80 L90 80" fill="none" stroke="#2563EB" stroke-width="8" stroke-linecap="round"></path>
+
+    <!-- Ordered upward graph -->
+    <polyline points="
+      20,70
+      35,60
+      50,65
+      65,50
+      80,40
+    " fill="none" stroke="#2563EB" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></polyline>
+
+  </g>
+
+  <!-- Text -->
+  <text x="120" y="75" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="44" font-weight="600" fill="#2563EB">
+    StockuiX
+  </text>
+
+</svg>

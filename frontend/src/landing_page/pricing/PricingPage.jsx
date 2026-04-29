@@ -1,8 +1,17 @@
 import React from 'react';
+import Hero from './Hero';
+import OpenAccount from '../../OpenAccount';
+import Brokerage from './Brokerage';
+import BrokerageCalculator from './BrokerageCalculator';
 
 function PricingPage() {
     return ( 
-        <h1>PricingPage</h1>
+        <>
+        <Hero/>
+        <BrokerageCalculator />
+        <OpenAccount/>
+        <Brokerage/>
+        </>
      );
 }
 
