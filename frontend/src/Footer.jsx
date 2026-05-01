@@ -9,8 +9,9 @@ function Footer() {
                     <div className="col-12 col-md-4 text-center text-md-start">
                         <div className="mb-3 d-flex align-items-center justify-content-center justify-content-md-start">
                             <img src="logo.svg" alt="StockUIX" style={{ height: "32px" }} className="me-2" />
-                            <h5 className="mb-0 fw-bold">StockUIX</h5>
+                            
                         </div>
+                        
                         <p className="small mb-3 text-muted">
                             © 2024 - 2026, StockUIX Inc.<br />
                             All rights reserved.
