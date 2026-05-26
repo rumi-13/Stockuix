@@ -1,10 +1,25 @@
-import React from "react";
+import {React, useState, useEffect} from "react";
 import { positions } from "../data";
+import axios from 'axios';
+
 
 const Positions = () => {
+  const [positionsData, setPositionsData] = useState([]);
+
+  useEffect(()=>{
+    const fetchPositionsData = async () =>{
+      const positionsRes = await axios.get("http://localhost:8000/api/position/allpositions");
+
+      
+      setPositionsData(positionsRes.data)
+    }
+
+    fetchPositionsData();
+  },[])
+
   return (
     <div className="p-4">
-      <h3 className="mb-4">Positions ({positions.length})</h3>
+      <h3 className="mb-4">Positions ({positionsData.length})</h3>
 
       <div className="table-responsive border rounded bg-white shadow-sm">
         <table className="table table-hover mb-0">
@@ -20,7 +35,7 @@ const Positions = () => {
             </tr>
           </thead>
           <tbody>
-            {positions.map((position, index) => {
+            {positionsData.map((position, index) => {
               const curValue = position.price * position.qty;
               const isProfit = curValue - position.avg * position.qty >= 0.0;
               const profClass = isProfit ? "text-success" : "text-danger";

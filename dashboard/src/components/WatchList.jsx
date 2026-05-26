@@ -1,8 +1,11 @@
-import { React, useState } from "react";
+import { React, useState, useContext } from "react";
 import { watchlist } from "../data";
 import { MdBarChart, MdKeyboardArrowDown, MdKeyboardArrowUp, MdMoreHoriz } from "react-icons/md";
+import GeneralContext from "./GeneralContext";
 
 const WatchList = () => {
+  const { openOrderWindow } = useContext(GeneralContext);
+
   return (
     <div className="watchlist-container border-end bg-white h-100 d-flex flex-column">
       <div className="search-container p-3 border-bottom sticky-top bg-white shadow-sm z-3">
@@ -26,7 +29,14 @@ const WatchList = () => {
       <div className="flex-grow-1 overflow-auto custom-scrollbar">
         <ul className="list-group list-group-flush">
           {watchlist.map((stock, index) => {
-            return <WatchListItem stock={stock} key={index} />;
+            return (
+              <WatchListItem
+                stock={stock}
+                key={index}
+                onBuy={() => openOrderWindow(stock.name, "BUY")}
+                onSell={() => openOrderWindow(stock.name, "SELL")}
+              />
+            );
           })}
         </ul>
       </div>
@@ -36,7 +46,7 @@ const WatchList = () => {
 
 export default WatchList;
 
-const WatchListItem = ({ stock }) => {
+const WatchListItem = ({ stock, onBuy, onSell }) => {
   const [showWatchlistActions, setShowWatchlistActions] = useState(false);
 
   return (
@@ -62,8 +72,8 @@ const WatchListItem = ({ stock }) => {
       {showWatchlistActions && (
         <div className="position-absolute top-0 start-0 w-100 h-100 bg-white d-flex align-items-center justify-content-end px-3 animate__animated animate__fadeIn animate__faster">
            <div className="btn-group shadow-sm" style={{ borderRadius: "8px", overflow: "hidden" }}>
-            <button className="btn btn-success py-1 px-3 border-0 small fw-bold" title="Buy (B)" style={{ fontSize: "12px" }}>BUY</button>
-            <button className="btn btn-danger py-1 px-3 border-0 small fw-bold" title="Sell (S)" style={{ fontSize: "12px" }}>SELL</button>
+            <button onClick={onBuy} className="btn btn-success py-1 px-3 border-0 small fw-bold" title="Buy (B)" style={{ fontSize: "12px" }}>BUY</button>
+            <button onClick={onSell} className="btn btn-danger py-1 px-3 border-0 small fw-bold" title="Sell (S)" style={{ fontSize: "12px" }}>SELL</button>
             <button className="btn btn-light py-1 px-2 border-0" title="Analytics (A)">
               <MdBarChart size={18} className="text-muted" />
             </button>
