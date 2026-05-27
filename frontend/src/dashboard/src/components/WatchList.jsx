@@ -1,6 +1,5 @@
-import { React, useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { watchlist } from "../data";
-import { MdBarChart, MdKeyboardArrowDown, MdKeyboardArrowUp, MdMoreHoriz } from "react-icons/md";
 import GeneralContext from "./GeneralContext";
 
 const WatchList = () => {
@@ -60,11 +59,9 @@ const WatchListItem = ({ stock, onBuy, onSell }) => {
         <p className={`mb-0 fw-bold ${stock.isDown ? "text-danger" : "text-success"}`} style={{ fontSize: "14px" }}>{stock.name}</p>
         <div className="d-flex align-items-center">
           <span className="text-muted small me-2" style={{ fontSize: "12px" }}>{stock.percent}</span>
-          {stock.isDown ? (
-            <MdKeyboardArrowDown className="text-danger" />
-          ) : (
-            <MdKeyboardArrowUp className="text-success" />
-          )}
+          <span className={stock.isDown ? "text-danger" : "text-success"} style={{ fontSize: "16px", lineHeight: 1 }}>
+            {stock.isDown ? "▼" : "▲"}
+          </span>
           <span className="price ms-2 fw-bold text-dark" style={{ fontSize: "14px" }}>{stock.price}</span>
         </div>
       </div>
@@ -75,10 +72,10 @@ const WatchListItem = ({ stock, onBuy, onSell }) => {
             <button onClick={onBuy} className="btn btn-success py-1 px-3 border-0 small fw-bold" title="Buy (B)" style={{ fontSize: "12px" }}>BUY</button>
             <button onClick={onSell} className="btn btn-danger py-1 px-3 border-0 small fw-bold" title="Sell (S)" style={{ fontSize: "12px" }}>SELL</button>
             <button className="btn btn-light py-1 px-2 border-0" title="Analytics (A)">
-              <MdBarChart size={18} className="text-muted" />
+              <span className="text-muted" style={{ fontSize: "16px" }}>▤</span>
             </button>
             <button className="btn btn-light py-1 px-2 border-0" title="More">
-              <MdMoreHoriz size={18} className="text-muted" />
+              <span className="text-muted" style={{ fontSize: "16px" }}>⋯</span>
             </button>
           </div>
         </div>

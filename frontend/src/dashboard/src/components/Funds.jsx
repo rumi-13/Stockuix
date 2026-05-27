@@ -7,8 +7,8 @@ const Funds = () => {
       <div className="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-4 gap-3">
         <h3 className="mb-0">Funds</h3>
         <div className="d-flex gap-2 w-100 w-sm-auto">
-          <Link className="btn btn-success px-4 fw-bold flex-grow-1 flex-sm-grow-0">Add funds</Link>
-          <Link className="btn btn-primary px-4 fw-bold flex-grow-1 flex-sm-grow-0">Withdraw</Link>
+          <button type="button" className="btn btn-success px-4 fw-bold flex-grow-1 flex-sm-grow-0">Add funds</button>
+          <button type="button" className="btn btn-primary px-4 fw-bold flex-grow-1 flex-sm-grow-0">Withdraw</button>
         </div>
       </div>
 
@@ -64,7 +64,7 @@ const Funds = () => {
                 <i className="fa-solid fa-box-open fs-3 text-muted"></i>
               </div>
               <p className="text-muted mb-4 small">You don't have a commodity account</p>
-              <Link className="btn btn-outline-primary px-4 fw-bold rounded-pill small">Open Account</Link>
+              <button type="button" className="btn btn-outline-primary px-4 fw-bold rounded-pill small">Open Account</button>
             </div>
           </div>
         </div>

@@ -1,8 +1,9 @@
 import React from "react";
-
+import { useNavigate } from 'react-router-dom';
 function Hero() {
+  const navigate = useNavigate();
   return (
-    <div className="container py-5 mt-md-5">
+    <div className="container py-4 ">
       <div className="row justify-content-center text-center">
         <div className="col-11 col-md-10">
           <img src="homeHero.png" alt="Hero Img" className="img-fluid mb-4 mb-md-5 px-lg-5" />
@@ -11,9 +12,7 @@ function Hero() {
             Start your investment journey today with our easy-to-use
             platform. Join millions of traders across the globe.
           </p>
-          <button className="btn btn-primary btn-lg px-5 py-2 py-md-3 rounded-pill fw-bold shadow-sm">
-            Signup now
-          </button>
+          
         </div>
       </div>
     </div>

@@ -42,7 +42,7 @@ const Orders = () => {
           <p className="text-muted mb-4">
             You haven't placed any orders today. Start trading to see your orders here.
           </p>
-          <Link to={"/"} className="btn btn-primary px-4 py-2 fw-bold rounded-pill shadow-sm">
+          <Link to={"/dashboard"} className="btn btn-primary px-4 py-2 fw-bold rounded-pill shadow-sm">
             Get started
           </Link>
         </div>
