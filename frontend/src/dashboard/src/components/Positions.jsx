@@ -8,7 +8,9 @@ const Positions = () => {
 
   useEffect(()=>{
     const fetchPositionsData = async () =>{
-      const positionsRes = await axios.get("http://localhost:8000/api/position/allpositions");
+      const positionsRes = await axios.get("http://localhost:8000/api/position/allpositions", {
+        withCredentials: true,
+      });
 
       
       setPositionsData(positionsRes.data)

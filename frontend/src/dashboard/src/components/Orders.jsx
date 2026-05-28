@@ -7,7 +7,9 @@ const Orders = () => {
 
   const fetchOrders = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/order/allorders");
+      const res = await axios.get("http://localhost:8000/api/order/allorders", {
+        withCredentials: true,
+      });
       setAllOrders(res.data);
     } catch (error) {
       console.error("Error fetching orders:", error);
@@ -16,7 +18,9 @@ const Orders = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/api/order/deleteorder/${id}`);
+      await axios.delete(`http://localhost:8000/api/order/deleteorder/${id}`, {
+        withCredentials: true,
+      });
       window.dispatchEvent(new Event("refresh-data"));
     } catch (error) {
       console.error("Error deleting order:", error);

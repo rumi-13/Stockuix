@@ -8,6 +8,7 @@ const Holdings = () => {
     try {
       const holdingsRes = await axios.get(
         "http://localhost:8000/api/holding/allholdings",
+        { withCredentials: true },
       );
       setHoldingsData(holdingsRes.data);
     } catch (error) {

@@ -8,7 +8,10 @@ module.exports.verifyToken = (req, res, next) => {
   const token = tokenMatch ? decodeURIComponent(tokenMatch[1]) : null;
 
   if (!token) {
-    return res.status(401).json({ message: "Access denied. No token provided." });
+    return res.status(401).json({
+      message: "Authentication required.",
+      error: "NO_TOKEN",
+    });
   }
 
   try {
@@ -16,6 +19,16 @@ module.exports.verifyToken = (req, res, next) => {
     req.user = decoded;
     next();
   } catch (error) {
-    return res.status(400).json({ message: "Invalid token." });
+    if (error.name === "TokenExpiredError") {
+      return res.status(401).json({
+        message: "Session expired. Please log in again.",
+        error: "TOKEN_EXPIRED",
+      });
+    }
+
+    return res.status(400).json({
+      message: "Invalid authentication token.",
+      error: "INVALID_TOKEN",
+    });
   }
 };

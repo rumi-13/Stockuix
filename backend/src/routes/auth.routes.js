@@ -4,9 +4,9 @@ const authController = require('../controllers/auth.controller');
 const { verifyToken } = require('../middlewares/verifyToken');
 
 router.post('/signup', authController.signUp);
-router.post('/login', authController.login);
-router.post('/logout', authController.logout);
-router.get('/verify', verifyToken, (req, res) => {
-	res.status(200).json({ authenticated: true });
-});
+router.post('/login',  authController.login);
+router.post('/logout', verifyToken, authController.logout);
+router.get('/verify', verifyToken, authController.verifyAuth);
+router.get('/me', verifyToken, authController.getCurrentUser);
+router.delete('/delete-account', verifyToken, authController.deleteAccount);
 module.exports = router;

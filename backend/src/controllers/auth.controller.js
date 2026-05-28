@@ -1,6 +1,9 @@
 const userModel = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 const { createSecretToken } = require("../utils/createSecretToken");
+const orderModel = require("../models/order.model");
+const holdingModel = require("../models/holding.model");
+const positionModel = require("../models/postition.model");
 
 const signUp = async (req, res) => {
   const payload = Object.keys(req.body || {}).length > 0 ? req.body : req.query;
@@ -65,4 +68,56 @@ const logout = async (req, res) => {
   return res.status(200).json({ message: "Logged out successfully." });
 };
 
-module.exports = { signUp, login, logout };
+const verifyAuth = async (req, res) => {
+  return res.status(200).json({ authenticated: true });
+};
+
+const getCurrentUser = async (req, res) => {
+  try {
+    const user = await userModel.findById(req.user.id).select("fullName email");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    return res.status(200).json({
+      id: user._id,
+      fullName: user.fullName,
+      email: user.email,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Failed to load user profile.",
+      error: error.message,
+    });
+  }
+};
+
+const deleteAccount = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const deletedUser = await userModel.findById(userId);
+
+    if (!deletedUser) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    await Promise.all([
+      orderModel.deleteMany({ user: userId }),
+      holdingModel.deleteMany({ user: userId }),
+      positionModel.deleteMany({ user: userId }),
+      userModel.findByIdAndDelete(userId),
+    ]);
+
+    res.clearCookie("token", { path: "/" });
+    return res.status(200).json({ message: "Account deleted successfully." });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Failed to delete account.",
+      error: error.message,
+    });
+  }
+};
+
+module.exports = { signUp, login, logout, verifyAuth, getCurrentUser, deleteAccount };

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-
 const BuyActionWindow = ({ uid = "", mode = "BUY", onClose }) => {
   const [stockQuantity, setStockQuantity] = useState(1);
   const [stockPrice, setStockPrice] = useState(0.0);
@@ -12,6 +11,8 @@ const BuyActionWindow = ({ uid = "", mode = "BUY", onClose }) => {
         qty: Number(stockQuantity),
         price: Number(stockPrice),
         mode,
+      }, {
+        withCredentials: true,
       });
 
       // Dispatch refresh event for other components
@@ -27,7 +28,7 @@ const BuyActionWindow = ({ uid = "", mode = "BUY", onClose }) => {
 
   return (
     <div 
-      className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" 
+      className="position-fixed top-0 inset-s-0 w-100 h-100 d-flex align-items-center justify-content-center" 
       style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", zIndex: 9999 }}
       onClick={onClose}
     >
@@ -89,14 +90,14 @@ const BuyActionWindow = ({ uid = "", mode = "BUY", onClose }) => {
           <div className="d-flex gap-2">
             <button 
               type="button" 
-              className="btn btn-light btn-lg flex-grow-1 rounded-3 fw-bold" 
+              className="btn btn-light btn-lg grow rounded-3 fw-bold" 
               onClick={onClose}
             >
               Cancel
             </button>
             <button 
               type="button" 
-              className={`btn ${mode === 'BUY' ? 'btn-success' : 'btn-danger'} btn-lg flex-grow-1 rounded-3 fw-bold`} 
+              className={`btn ${mode === 'BUY' ? 'btn-success' : 'btn-danger'} btn-lg grow rounded-3 fw-bold`} 
               onClick={handleSubmit}
             >
               {mode === "BUY" ? "Buy" : "Sell"}
