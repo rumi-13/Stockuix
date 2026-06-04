@@ -1,3 +1,5 @@
+.vscode/
+
 # Logs
 logs
 *.log
@@ -7,14 +9,20 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Node
 node_modules
+**/node_modules/
+
+# Build outputs
 dist
+frontend/dist
 dist-ssr
+build
+
+# Local config
 *.local
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
 .idea
 .DS_Store
 *.suo
@@ -23,5 +31,9 @@ dist-ssr
 *.sln
 *.sw?
 
-/public/docs
+# Environment files
+.env
+**/.env
 
+# Frontend generated docs
+frontend/public/docs/
