@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import api from "../../../utils/axios";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const Menu = () => {
@@ -14,7 +14,7 @@ const Menu = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post("http://localhost:8000/api/auth/logout", {}, { withCredentials: true });
+      await api.post("/api/auth/logout", {});
     } catch (error) {
       console.error("Logout failed:", error);
     } finally {
@@ -26,9 +26,7 @@ const Menu = () => {
     setIsDeleting(true);
     setDeleteError("");
     try {
-      await axios.delete("http://localhost:8000/api/auth/delete-account", {
-        withCredentials: true,
-      });
+      await api.delete("/api/auth/delete-account");
       navigate("/login", { replace: true });
     } catch (error) {
       console.error("Delete account failed:", error);

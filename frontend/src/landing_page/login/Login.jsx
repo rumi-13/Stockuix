@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../../utils/axios";
 function Login() {
   const [formData, setFormData] = useState({
     email: "",
@@ -21,14 +21,11 @@ function Login() {
 
     try {
       console.log("Attempting login with email:", formData.email);
-      const response = await axios.post(
-        "http://localhost:8000/api/auth/login",
+      const response = await api.post(
+        "/api/auth/login",
         {
           email: formData.email,
           password: formData.password,
-        },
-        {
-          withCredentials: true,
         },
       );
       

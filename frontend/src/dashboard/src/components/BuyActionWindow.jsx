@@ -1,18 +1,16 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../../../utils/axios";
 const BuyActionWindow = ({ uid = "", mode = "BUY", onClose }) => {
   const [stockQuantity, setStockQuantity] = useState(1);
   const [stockPrice, setStockPrice] = useState(0.0);
 
   const handleSubmit = async () => {
     try {
-      await axios.post("http://localhost:8000/api/order/neworder", {
+      await api.post("/api/order/neworder", {
         name: uid,
         qty: Number(stockQuantity),
         price: Number(stockPrice),
         mode,
-      }, {
-        withCredentials: true,
       });
 
       // Dispatch refresh event for other components

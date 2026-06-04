@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../../../utils/axios";
 import { Link } from "react-router-dom";
 
 const Orders = () => {
@@ -7,9 +7,7 @@ const Orders = () => {
 
   const fetchOrders = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/order/allorders", {
-        withCredentials: true,
-      });
+      const res = await api.get("/api/order/allorders");
       setAllOrders(res.data);
     } catch (error) {
       console.error("Error fetching orders:", error);
@@ -18,9 +16,7 @@ const Orders = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/api/order/deleteorder/${id}`, {
-        withCredentials: true,
-      });
+      await api.delete(`/api/order/deleteorder/${id}`);
       window.dispatchEvent(new Event("refresh-data"));
     } catch (error) {
       console.error("Error deleting order:", error);

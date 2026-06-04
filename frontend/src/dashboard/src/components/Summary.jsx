@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../../../utils/axios";
 
 const Summary = () => {
   const [fullName, setFullName] = useState("User");
@@ -9,12 +9,8 @@ const Summary = () => {
     const fetchDashboardData = async () => {
       try {
         const [userResponse, holdingsResponse] = await Promise.all([
-          axios.get("http://localhost:8000/api/auth/me", {
-            withCredentials: true,
-          }),
-          axios.get("http://localhost:8000/api/holding/allholdings", {
-            withCredentials: true,
-          }),
+          api.get("/api/auth/me"),
+          api.get("/api/holding/allholdings"),
         ]);
 
         if (userResponse.data?.fullName) {

@@ -1,15 +1,12 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../../../utils/axios";
 
 const Holdings = () => {
   const [holdingsData, setHoldingsData] = useState([]);
 
   const fetchHoldingsData = async () => {
     try {
-      const holdingsRes = await axios.get(
-        "http://localhost:8000/api/holding/allholdings",
-        { withCredentials: true },
-      );
+      const holdingsRes = await api.get("/api/holding/allholdings");
       setHoldingsData(holdingsRes.data);
     } catch (error) {
       console.error("Error fetching holdings:", error);

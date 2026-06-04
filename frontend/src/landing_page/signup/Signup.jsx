@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../utils/axios';
 
 
 function Signup() {
@@ -26,15 +26,14 @@ function Signup() {
         event.preventDefault();
 
         try {
-            const response = await axios.post(
-                'http://localhost:8000/api/auth/signup',
+            const response = await api.post(
+                '/api/auth/signup',
                 {
                     fullName: formData.fullName,
                     email: formData.email,
                     password: formData.password,
                     number: formData.number,
                 },
-                { withCredentials: true }
             );
 
             const id = response.data.id;
