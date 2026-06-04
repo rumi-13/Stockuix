@@ -1,6 +1,20 @@
 # StockuiX
 
-A MERN stock trading platform with a React/Vite frontend and an Express/MongoDB backend.
+StockuiX is a MERN-based stock trading platform built for learning and practical demo trading.
+It combines a React/Vite frontend with an Express and MongoDB backend.
+The app provides a clean dashboard for managing trades, holdings, and positions.
+Users can sign up, log in, place orders, and manage their own account securely.
+The platform keeps trading data user-specific through token-based authentication.
+It is designed as a full-stack stock market style experience with a simple workflow.
+
+## Overview
+
+StockuiX gives users a dashboard-driven trading experience with protected routes, account-based data, and persistent portfolio records.
+It is split into a frontend for the trading UI and a backend for authentication, orders, holdings, and positions.
+The app uses cookie-based auth so the browser stays signed in across requests.
+Each user sees only their own trading activity and portfolio data.
+Account deletion removes the user and related trading records.
+The project is organized to be easy to run, extend, and demonstrate.
 
 ## Project Structure
 
@@ -30,6 +44,17 @@ A MERN stock trading platform with a React/Vite frontend and an Express/MongoDB 
 - create, update, and delete orders
 - user-specific holdings and positions
 - account deletion with cascade cleanup of trading data
+- dashboard summary driven by the logged-in user's holdings data
+- cookie-based requests for authenticated backend calls
+
+## Key Features
+
+- modern dashboard interface with a watchlist, summary view, holdings, orders, and positions
+- auth-protected routes for dashboard access
+- order placement flow for buy and sell actions
+- user-specific trading records stored in MongoDB
+- delete-account flow with confirmation dialog in the UI
+- reusable backend controllers for route logic
 
 ## Notes
 

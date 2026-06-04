@@ -35,7 +35,13 @@ const signUp = async (req, res) => {
   const token = await createSecretToken(newUser._id);
   try {
     await newUser.save();
-    res.status(201).cookie("token", token, { httpOnly: true }).json({ message: "User created successfully." , id: newUser._id});
+    const cookieOptions = {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      path: '/',
+    };
+    res.status(201).cookie("token", token, cookieOptions).json({ message: "User created successfully." , id: newUser._id});
   } catch (error) {
     res
       .status(500)
@@ -58,13 +64,25 @@ const login = async (req, res) => {
     }
 
     const token = await createSecretToken(user._id);
-    
-    res.status(200).cookie("token", token, { httpOnly: true }).json({ message: "Login successful." , id: user._id});
+    const cookieOptions = {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      path: '/',
+    };
+
+    res.status(200).cookie("token", token, cookieOptions).json({ message: "Login successful." , id: user._id});
 
 };
 
 const logout = async (req, res) => {
-  res.clearCookie("token", { path: "/" });
+  const cookieOptions = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    path: '/',
+  };
+  res.clearCookie("token", cookieOptions);
   return res.status(200).json({ message: "Logged out successfully." });
 };
 
@@ -110,7 +128,14 @@ const deleteAccount = async (req, res) => {
       userModel.findByIdAndDelete(userId),
     ]);
 
-    res.clearCookie("token", { path: "/" });
+    const cookieOptions = {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      path: '/',
+    };
+
+    res.clearCookie("token", cookieOptions);
     return res.status(200).json({ message: "Account deleted successfully." });
   } catch (error) {
     return res.status(500).json({
